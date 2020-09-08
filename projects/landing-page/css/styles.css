@@ -108,6 +108,11 @@ section {
     color: #fff;
 }
 
+.page__footer button {
+    color: #fff;
+    background-color: #333;
+}
+
 
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */
