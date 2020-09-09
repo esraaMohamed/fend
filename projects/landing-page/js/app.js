@@ -19,6 +19,9 @@
  */
 
 const sections = document.getElementsByTagName("section");
+const headers = document.getElementsByTagName("h2");
+const sectionNames = Array.from(headers).map((header) => header.textContent);
+const navigationList = document.getElementById("navbar__list");
 
 /**
  * End Global Variables
@@ -41,13 +44,22 @@ const isScrolledIntoView = (element) => {
 };
 
 const checkSectionInView = () => {
+  const anchors = document.querySelectorAll("a");
   Array.from(sections).map((section) => {
-    isScrolledIntoView(section)
+    const header = section.querySelector("h2");
+    const anchor = Array.from(anchors).filter(
+      (a) => a.textContent === section.getAttribute("data-nav")
+    );
+    isScrolledIntoView(header)
       ? console.log(section.id, "In the viewport!")
       : console.log(section.id, "Not in the viewport... whomp whomp");
-    return isScrolledIntoView(section)
-      ? section.classList.toggle("your-active-class")
-      : section.classList.remove("your-active-class");
+    if (isScrolledIntoView(header)) {
+      section.classList.toggle("your-active-class");
+      anchor[0].classList.add("highlighted");
+    } else {
+      section.classList.remove("your-active-class");
+      anchor[0].classList.remove("highlighted");
+    }
   });
 };
 
@@ -70,10 +82,7 @@ const throttle = (func, wait = 100) => {
 
 // build the nav
 // Build menu
-const headers = document.getElementsByTagName("h2");
-const sectionNames = Array.from(headers).map((header) => header.textContent);
 
-const navigationList = document.getElementById("navbar__list");
 const navigationFragment = document.createDocumentFragment();
 
 for (let i = 0; i < sectionNames.length; i++) {
