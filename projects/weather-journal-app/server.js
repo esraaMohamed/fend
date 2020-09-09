@@ -34,9 +34,11 @@ app.post('/addEntry', (request, response) => {
         userResponse: data.userResponse
     }
     projectData.push(newEntry)
+    console.log(newEntry)
     response.send('Entry Added')
 })
 
 app.get('/getEntries', (request, response) => {
+  console.log(projectData)
   response.send(projectData);
 });
