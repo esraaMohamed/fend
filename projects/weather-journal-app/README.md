@@ -19,4 +19,4 @@ This project requires you to create an asynchronous web app that uses Web API an
 ## Troubleshooting
 - You might get an error message when you try to open the localhost saying `This site can’t provide a secure connection` to fix this you need to use the GET flag=true to get the app to work
 - Navigate to `https://localhost:3000/fake=true`
-- If you already have an application running on port 3000 you can change the port value by opening the `server.js` file and changing the value of the `port` variable.
+- If you already have an application running on port 3000 you can change the port value by opening the `server.js` file and changing the value of the `port` variable. Note that you won't have to stop and restart the server to see the changes since i'm using nodemon to handle restarting the server when any changes occur.
