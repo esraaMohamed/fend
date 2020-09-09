@@ -63,7 +63,17 @@ input{
     font-family: 'Oswald', sans-serif;
     border: none;
 }
-
+.error {
+    background: white;
+    display: none;
+    color: red;
+    text-align: center;
+    height: 35px;
+    width: 320px;
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    border: none;
+}
 button{
     width: 400px;
     height: 100px;
