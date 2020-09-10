@@ -22,7 +22,7 @@ document.getElementById("zip").addEventListener("input", (event) => {
 const fetchWeatherData = () => {
   const zipCode = document.getElementById("zip").value;
   const userResponse = document.getElementById("feelings").value;
-  const fetchUrl = `${baseUrl}${zipCode},us&appid=${apiKey}`;
+  const fetchUrl = `${baseUrl}${zipCode},us&appid=${apiKey}&units=imperial`;
   getWeatherData(fetchUrl)
     .then((data) => {
       addEntry({
