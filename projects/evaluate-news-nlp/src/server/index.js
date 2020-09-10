@@ -27,29 +27,26 @@ app.use(express.static("dist"));
 
 console.log(__dirname);
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   res.sendFile("dist/index.html");
 });
 
 // designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
+app.listen(8080, () => {
   console.log("Example app listening on port 8080!");
 });
 
 app.post("/sentiment", (req, res) => {
-    const analysisText = req.body.txt
-  meaningCloudApi.sentiment(
-    { txt: analysisText },
-    (error, result) => {
-      if (error) {
-        console.log("Error during creating meaning cloud request");
-        res.send();
-        return;
-      }
-      console.log("Got sentiment results", result);
-      res.send(result);
+  const analysisText = req.body.txt;
+  meaningCloudApi.sentiment({ txt: analysisText }, (error, result) => {
+    if (error) {
+      console.log("Error during creating meaning cloud request");
+      res.send();
+      return;
     }
-  );
+    console.log("Got sentiment results", result);
+    res.send(result);
+  });
 });
 
 module.exports = app;
