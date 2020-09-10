@@ -85,7 +85,7 @@ const updateUI = async () => {
           ).innerHTML = `Date was: ${data.date}`;
           document.getElementById(
             "temp"
-          ).innerHTML = `Temperature was: ${data.temperature}`;
+          ).innerHTML = `Temperature was: ${data.temperature} °F`;
           document.getElementById(
               "weather"
             ).innerHTML = `The weather description was: ${data.weather}`;
