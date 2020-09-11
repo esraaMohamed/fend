@@ -6,10 +6,9 @@ module.exports = {
     entry: './src/client/index.js',
     mode: 'development',
     devtool: 'source-map',
-    stats: 'verbose',
     output: {
         libraryTarget: 'var',
-        library: 'Client'
+        library: 'Client',
     },
     module: {
         rules: [
@@ -20,8 +19,26 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                uses: ['style-loader', 'css-loader', 'sass-loader']
-            }
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        limit: 8000, // Convert images < 8kb to base64 strings
+                        name: '[path][name].[ext]',
+                        outputPath: 'images/',
+                        publicPath: 'images/'
+                    }
+                }]
+            },
+            {
+                test:/\.html$/,
+                use: [
+                  'html-loader'
+                ]
+              },
         ]
     },
     plugins: [

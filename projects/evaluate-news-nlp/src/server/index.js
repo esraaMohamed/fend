@@ -1,28 +1,32 @@
 const dotenv = require("dotenv");
 dotenv.config();
-var path = require("path");
-const express = require("express");
-const mockAPIResponse = require("./mockAPI.js");
-const MeaningCloud = require("meaning-cloud");
-const meaningCloudApi = MeaningCloud({
-  key: process.env.API_KEY,
-  endpoints: {
-    "sentiment-analysis": "/sentiment-2.1",
-  },
-  of: json,
-});
 
+const baseUrl = `https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}`
+
+var path = require("path");
+const fetch = require('node-fetch')
+const express = require("express");
 const app = express();
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Cors for cross origin allowance
 const cors = require("cors");
-const { json } = require("body-parser");
-app.use(cors());
+var allowedOrigins = ['http://localhost:8080',
+  'http://localhost:8080/sentiment'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 app.use(express.static("dist"));
 
 console.log(__dirname);
@@ -31,22 +35,23 @@ app.get("/", (req, res) => {
   res.sendFile("dist/index.html");
 });
 
-// designates what port the app will listen to for incoming requests
-app.listen(8080, () => {
-  console.log("Example app listening on port 8080!");
+app.listen(8081, () => {
+  console.log("Example app listening on port 8081!");
 });
 
 app.post("/sentiment", (req, res) => {
-  const analysisText = req.body.txt;
-  meaningCloudApi.sentiment({ txt: analysisText }, (error, result) => {
-    if (error) {
-      console.log("Error during creating meaning cloud request");
-      res.send();
-      return;
-    }
-    console.log("Got sentiment results", result);
-    res.send(result);
-  });
+  const url = req.body.url;
+  console.log('analysisText', url)
+  const fetchUrl = `${baseUrl}&lang=auto&of=json&url=${url}&verbose=y`
+  fetch(fetchUrl, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({ url })
+  }).then(data =>  data.json()).then(data => res.send(data))
 });
 
 module.exports = app;

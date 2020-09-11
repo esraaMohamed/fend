@@ -2,50 +2,72 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
+        <title>NLP</title>
     </head>
 
     <body>
 
         <header>
             <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
+                <img src="images/nlp.jpg" alt="nlp"/>
             </div>
         </header>
 
         <main>
             <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                <form class="" onsubmit="return Client.handleSubmit(event)">
+                    <label class="title" for="name">URL:
+                    </label>
+                    <input id="name" type="text" name="input" value="" placeholder="Name">
+                    <input id="submit" type="submit" name="" value="Submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+                    <p id="error" class="error" hidden>Please input a valid URL</p>
                 </form>
-            <section>
+                <section>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
+                    <section class="results">
+                        <strong class="title">NLP Results:</strong>
+                        <ul type="circle">
+                            <li>
+                                <div id="subjectivity"></div>
+                            </li>
+                            <li>
+                                <div id="score"></div>
+                            </li>
+                            <li>
+                                <div id="agreement"></div>
+                            </li>
+                            <li>
+                                <div id="confidence"></div>
+                            </li>
+                            <li>
+                                <div id="irony"></div>
+                            </li>
+                        </ul>
+                    </section>
+                </main>
 
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-        <script>
-            // Check that service workers are supported
-            if ('serviceWorker' in navigator) {
-              // Use the window load event to keep the page load performant
-              window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js');
-              });
-            }
-            </script>
+                <footer class="footer">
+                    <h3>Contact Me
+                    </h3>
+                    <a href="https://github.com/esraaMohamed">
+                        <img class="logos" src="images/github.jpg" alt="Github">
+                    </a>
+                    <a href="https://www.facebook.com/No0oU">
+                        <img class="logos" src="images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.linkedin.com/in/esraa-afifi/">
+                        <img class="logos" src="images/linkedin.png" alt="LinkedIn">
+                    </a>
+                </footer>
+                <script>
+                    // Check that service workers are supported
+                    if ('serviceWorker' in navigator) { // Use the window load event to keep the page load performant
+                        window.addEventListener('load', () => {
+                            navigator.serviceWorker.register('/service-worker.js');
+                        });
+                    }
+                </script>
+            </body>
+        </html>
     </body>
 </html>

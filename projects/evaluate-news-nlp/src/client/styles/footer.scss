@@ -1,0 +1,22 @@
+@import 'base.scss';
+@import 'base.scss';
+
+.footer {
+    display: flex;
+    flex-flow: row;
+    align-content: flex-end;
+    justify-content: center;
+
+    h3 {
+        padding-top: 20px;
+        color: $headerColor;
+        font-weight: 600;
+    }
+}
+
+.logos {
+    width: 32px;
+    height: 32px;
+    border-radius: 0.5px;
+    margin: 10px;
+}

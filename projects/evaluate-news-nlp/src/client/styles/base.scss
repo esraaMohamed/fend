@@ -1,7 +1,11 @@
+$error: red;
+$headerColor: darkslategray;
+$font: 'Courier New','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: $font;
 }
 
 main {
@@ -12,3 +16,17 @@ section {
     max-width: 800px;
     margin: 50px auto;
 }
+
+.error {
+    color: $error;
+}
+
+.errorBorder {
+    border: 1px solid $error;
+}
+
+img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
